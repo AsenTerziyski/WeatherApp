@@ -1,7 +1,7 @@
-package com.example.weatherapp.data.usecase
+package com.example.weatherapp.domain.usecase
 
-import com.example.weatherapp.data.WeatherInfo
-import com.example.weatherapp.data.WeatherInfoRepo
+import com.example.weatherapp.domain.WeatherInfo
+import com.example.weatherapp.domain.WeatherInfoRepo
 import javax.inject.Inject
 
 class GetWeatherUseCase @Inject constructor(
