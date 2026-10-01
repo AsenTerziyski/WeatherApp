@@ -26,13 +26,8 @@ out/
 # IDE / Tooling specific files
 *.iml
 .DS_Store
+.idea/
 /captures
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
 
 # Signing keys (Crucial for security!)
 *.jks
