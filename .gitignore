@@ -1,0 +1,39 @@
+# Built application files
+*.apk
+*.apks
+*.aab
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+/build/
+
+# Gradle files
+.gradle/
+/local.properties
+
+# JNI native libraries
+.externalNativeBuild
+.cxx
+
+# IDE / Tooling specific files
+*.iml
+.DS_Store
+/captures
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Signing keys (Crucial for security!)
+*.jks
+*.keystore
