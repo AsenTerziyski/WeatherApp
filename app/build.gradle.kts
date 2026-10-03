@@ -62,6 +62,7 @@ dependencies {
     // Retrofit & Gson
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0") // (or your matching OkHttp version)
 
     // Room Database
     implementation(libs.androidx.room.runtime)
