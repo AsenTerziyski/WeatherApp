@@ -2,6 +2,7 @@ package com.example.weatherapp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.data.LocationTracker
 import com.example.weatherapp.domain.usecase.GetWeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val getWeatherUseCase: GetWeatherUseCase
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val locationTracker: LocationTracker
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<WeatherUiState> =
