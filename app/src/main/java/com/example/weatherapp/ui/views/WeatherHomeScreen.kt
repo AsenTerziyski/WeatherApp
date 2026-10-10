@@ -20,40 +20,24 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.weatherapp.domain.WeatherInfo
 import com.example.weatherapp.ui.WeatherUiState
-import com.example.weatherapp.ui.WeatherViewModel
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
 fun WeatherHomeScreen(
-    viewModel: WeatherViewModel,
+    uiState: WeatherUiState,
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     onRequestLocation: () -> Unit,
     onNavigateToDetails: () -> Unit
 ) {
 
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val eventFlow = viewModel.eventFlow
-    val snackBarHostState = remember { SnackbarHostState() }
-
-
-    LaunchedEffect(Unit) {
-        eventFlow.collect { message ->
-            snackBarHostState.showSnackbar(message)
-        }
-    }
-
-    Scaffold(
-        snackbarHost = { SnackbarHost(snackBarHostState) }
-    ) { paddingValues ->
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -67,7 +51,7 @@ fun WeatherHomeScreen(
                     .padding(16.dp)
             ) {
 
-                when (val state = uiState) {
+                when (uiState) {
 
                     WeatherUiState.Initial -> InitialScreen {
                         onRequestLocation.invoke()
@@ -75,7 +59,7 @@ fun WeatherHomeScreen(
 
                     WeatherUiState.Loading -> LoadingScreen()
 
-                    is WeatherUiState.Success -> SuccessScreen(state) {
+                    is WeatherUiState.Success -> SuccessScreen(uiState) {
                         onNavigateToDetails.invoke()
                     }
 
