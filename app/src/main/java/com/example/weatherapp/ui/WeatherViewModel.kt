@@ -23,7 +23,7 @@ class WeatherViewModel @Inject constructor(
 
     private val _uiState: MutableStateFlow<WeatherUiState> =
         MutableStateFlow(WeatherUiState.Initial)
-    private val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
 
     private val _eventChannel = Channel<String>()
     val eventFlow = _eventChannel.receiveAsFlow()
