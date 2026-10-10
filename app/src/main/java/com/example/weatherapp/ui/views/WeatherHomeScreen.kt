@@ -3,14 +3,18 @@ package com.example.weatherapp.ui.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -58,9 +62,9 @@ fun WeatherHomeScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(
-                    16.dp
-                )
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
 
                 when (val state = uiState) {
@@ -72,7 +76,7 @@ fun WeatherHomeScreen(
                     WeatherUiState.Loading -> LoadingScreen()
 
                     is WeatherUiState.Success -> SuccessScreen(state) {
-
+                        onNavigateToDetails.invoke()
                     }
 
                     is WeatherUiState.Error -> ErrorScreen {
@@ -89,13 +93,40 @@ fun SuccessScreen(
     state: WeatherUiState.Success,
     onNavigateToDetails: () -> Unit
 ) {
-
     val weather = state.weatherInfo
 
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(24.dp)
+            ) {
 
+                Text(
+                    text = weather.cityName,
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Temperature: ${weather.temperature}°C",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
 
+            OutlinedButton(onClick = onNavigateToDetails) {
+                Text("View Details")
+            }
+        }
+    }
 }
-
 
 @Preview
 @Composable
