@@ -39,3 +39,13 @@ fun DailyWeatherDto.toDomain(): List<DailyWeatherInfo> = time.indices.map { i ->
         weatherCode = code.getOrElse(i) { 0 }
     )
 }
+
+
+fun WeatherResponseDto.toDomain() = WeatherInfo(
+    cityName = "",
+    temperature = current.temperature2m,
+    windSpeed = current.windSpeed10m,
+    weatherCode = current.weatherCode,
+    dailyForecast = daily?.toDomain() ?: emptyList(),
+    hourlyForecast = hourly?.toDomain() ?: emptyList()
+)

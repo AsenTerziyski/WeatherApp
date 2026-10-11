@@ -18,9 +18,8 @@ class WeatherInfoRepoImpl @Inject constructor(
         cityName: String
     ): WeatherInfo = try {
         val response = api.getWeather(lat, lon)
-        val entity = response.toEntity(cityName)
-        dao.insertWeather(entity)
-        entity.toDomain()
+        dao.insertWeather(response.toEntity(cityName))
+        response.toDomain()
     } catch (e: Exception) {
         val cachedWeather = dao.getWeather(cityName)
         cachedWeather?.toDomain() ?: throw e
