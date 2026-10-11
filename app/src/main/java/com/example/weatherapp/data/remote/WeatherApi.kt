@@ -11,4 +11,7 @@ interface WeatherApi {
         @Query("longitude") lon: Double,
         @Query("current") current: String = "temperature_2m,wind_speed_10m,weather_code"
     ): WeatherResponseDto
+
+
+
 }
