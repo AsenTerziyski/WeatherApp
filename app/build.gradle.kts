@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -80,4 +81,5 @@ dependencies {
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.0")
-}
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")}
