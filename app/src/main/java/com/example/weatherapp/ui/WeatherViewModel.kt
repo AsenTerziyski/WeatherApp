@@ -32,12 +32,12 @@ class WeatherViewModel @Inject constructor(
         _uiState.update { WeatherUiState.Loading }
         viewModelScope.launch {
             try {
-                val location = locationTracker.getCurrentLocation()
-                if (location != null) {
+                val locationData = locationTracker.getCurrentLocationData()
+                if (locationData != null) {
                     val weather = getWeatherUseCase(
-                        location.latitude,
-                        location.longitude,
-                        "My Current Location"
+                        locationData.latitude,
+                        locationData.longitude,
+                        locationData.cityName
                     )
                     _uiState.value = WeatherUiState.Success(weather)
                 } else {
